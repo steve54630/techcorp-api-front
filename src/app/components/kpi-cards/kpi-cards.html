@@ -1,0 +1,27 @@
+<section class="min-w-48">
+  <div class="flex flex-row md-10">
+    <h3 class="text-sm items-start">{{ title }}</h3>
+    <span [ngClass]="color" class="rounded-2xl p-2 items-end"
+      ><lucide-icon [name]="icon"></lucide-icon
+    ></span>
+  </div>
+  <div class="flex items-baseline">
+      <p class="text-xl font-bold text-gray-800 mr-2">{{ value }}{{ unit }}</p>
+    @if (target) {
+        <p class="text-xl font-normal text-gray-600">/{{ target }}{{ unit }}k</p>
+    }
+  </div>
+  <div class="mt-4">
+        
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+            
+            <div 
+                class="h-2.5 rounded-full" 
+                
+                [ngClass]="color"
+                
+                [style.width.%]="absoluteValue">
+            </div>
+        </div>
+    </div>
+</section>

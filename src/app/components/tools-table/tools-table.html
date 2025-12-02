@@ -1,0 +1,45 @@
+<div class="p-6 max-w-full rounded-xl border border-gray-100 shadow-lg bg-white">
+    
+    <h1 class="text-2xl font-bold mb-5 text-gray-800">Recent Tools</h1>
+    
+    <div class="max-h-[75vh] overflow-y-auto">
+
+        <table class="w-full divide-y divide-gray-200">
+        
+            <thead class="text-xl top-0"> 
+                <tr>
+                    <th class="px-6 py-3 text-left text-gray-500 tracking-wider">Tool</th>
+                    <th class="px-6 py-3 text-left text-gray-500 tracking-wider">Department</th>
+                    <th class="px-6 py-3 text-left text-gray-500 tracking-wider">Users</th>
+                    <th class="px-6 py-3 text-left text-gray-500 tracking-wider">Monthly Cost</th>
+                    <th class="px-6 py-3 text-left text-gray-500 tracking-wider">Status</th>
+                </tr>
+            </thead>
+            
+            <tbody class="divide-y divide-gray-100 text-2xl">
+                @for (tool of tools; track $index) {
+                    <tr class="hover:bg-gray-50">
+                        
+                        <td class="py-8 pl-5 whitespace-nowrap">
+                            <div class="flex items-center gap-5"> 
+                                <img src="{{ tool.icon_url }}" class="h-5 w-5 rounded" alt="Icone de {{ tool.name }}"/> 
+                                <span>{{ tool.name }}</span>
+                            </div>
+                        </td>
+                        
+                        <td class="px-6 py-8 whitespace-nowrap">{{ tool.owner_department || "N/A" }}</td>
+                        <td class="px-6 py-8 whitespace-nowrap">{{ tool.active_users_count || 0 }}</td>
+                        
+                        <td class="px-6 py-8 whitespace-nowrap">
+                            €{{ tool.monthly_cost }}
+                        </td>
+                        
+                        <td class="px-6 py-8 whitespace-nowrap">
+                           <app-status-badge status="{{ tool.status }}"></app-status-badge>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
