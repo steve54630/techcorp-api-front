@@ -12,10 +12,11 @@ import { NgClass } from '@angular/common';
 export class KpiCards {
 
   @Input() title: string = '';
-  @Input() value: string = '';
+  @Input() value: number = 0;
   @Input() unit: string = '';
   @Input() target? : number
   @Input() trend: string = '';
+  @Input() class!: string;
 
   color: string = '';
   icon: string = '';
@@ -23,11 +24,11 @@ export class KpiCards {
 
   ngOnInit() {
     this.icon = this.getIcon(this.title);
-    this.color = this.getTargetColor(this.trend);
+    this.color = this.getTargetColor();
     this.absoluteValue = absoluteValue(this.trend);
   }
 
-  getTargetColor(trend: string): string {
+  getTargetColor(): string {
     
     const change = this.trend.charAt(0);
     const trendDirection : boolean = change === '+' ? true : false;

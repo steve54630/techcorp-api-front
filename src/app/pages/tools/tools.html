@@ -1,1 +1,11 @@
-<p>tools works!</p>
+@if (tools$ | async; as tools) { @if (query$ | async; as query) {
+<app-tools-table
+  [tools]="tools"
+  [query]="query"
+  (sortChanged)="onSortChange($event)"
+  (pageChange)="onPageChange($event)"
+  [resume]="false"
+  [title]="'All Tools'"
+  [totalCount]="totalCount$ | async"
+/>
+} }

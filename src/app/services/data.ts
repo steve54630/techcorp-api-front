@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
+import IAnalytics from '../types/analytics';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,8 @@ export class DataService {
 
   private apiUrl = environment.apiUrl
 
-  getAnalytics() {
-    return this.http.get(`${this.apiUrl}/analytics`);
+  getAnalytics() : Observable<IAnalytics>{
+    return this.http.get<IAnalytics>(`${this.apiUrl}/analytics`);
   }
   
 }

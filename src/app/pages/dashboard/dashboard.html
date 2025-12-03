@@ -1,1 +1,30 @@
-<app-tools-table/>
+<section class="flex flex-col gap-5">
+  <h1 class="text-4xl font-bold text-gray-800">Internal Tools Dashboard</h1>
+  <p class="text-gray-600 text-lg">
+    Monitor and manage your organization's software tools and expenses
+  </p>
+</section>
+<div
+  class="flex flex-row my-8 w-full items-baseline justify-between"
+>
+  @if (kpiData$ | async; as kpiData) { @for (kpi of kpiData; track $index) {
+  <app-kpi-cards
+    [title]="kpi.title"
+    [value]="kpi.value"
+    [target]="kpi.target"
+    [unit]="kpi.unit"
+    [trend]="kpi.trend"
+    [class]="`w-104 p-10 border-gray-400 shadow-xl rounded-2xl`"
+  />
+  } }
+</div>
+@if (tools$ | async; as tools) { @if (query$ | async; as query) {
+<app-tools-table
+  [tools]="tools"
+  [query]="query"
+  (sortChanged)="onSortChange($event)"
+  (pageChange)="onPageChange($event)"
+  [resume]="true"
+  [title]="'Recent Tools'"
+/>
+} }
