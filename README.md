@@ -36,45 +36,17 @@ L'architecture est construite autour du principe du "Modular Monolith" et de l'a
 
 Structure Projet
 
-Répertoire
-
-Description
-
-src/app/components
-
-Composants réutilisables dans l'application
-
-src/app/pages
-
-Pages de l'application
-
-src/app/pages/dashboard
-
-Module de la page d'accueil (synthèse).
-
-src/app/pages/tools
-
-Module principal de gestion des outils (filtrage, tri, tableau).
-
-src/app/pages/analytics
-
-Module de visualisation des données (charts).
-
-src/app/services
-
-Modules de gestion de l'accès aux données
-
-src/app/styles
-
-Fichiers css global de l'application
-
-src/app/types
-
-Fichier pour donner le typage de TS
-
-src/app/utils
-
-Fonctions réutilisables dans l'application
+| Répertoire | Description |
+|------------|-------------|
+| src/app/components | Composants réutilisables dans l'application |
+| src/app/pages | Pages de l'application |
+| src/app/pages/dashboard | Module de la page d'accueil (synthèse) |
+| src/app/pages/tools | Module principal de gestion des outils (filtrage, tri, tableau) |
+| src/app/pages/analytics | Module de visualisation des données (charts) |
+| src/app/services | Modules de gestion de l'accès aux données |
+| src/app/styles | Fichiers css global de l'application |
+| src/app/types | Fichier pour donner le typage de TS |
+| src/app/utils | Fonctions réutilisables dans l'application |
 
 # Organisation du Code
 
@@ -84,7 +56,7 @@ Smart/Dumb Components : Séparation stricte entre les composants "intelligents" 
 
 Typed Data : Utilisation d'interfaces TypeScript (Tool, Department, etc.) pour garantir la robustesse et l'autocomplétion.
 
-🎨 Design System Evolution
+# 🎨 Design System Evolution
 
 Le Design System a été construit et maintenu rapidement sur une période courte de 3 jours grâce à l'utilisation combinée de Tailwind CSS et Angular Material.
 
@@ -94,7 +66,7 @@ Jour 2 (Composants Riches) : Intégration d'Angular Material pour les éléments
 
 Jour 3 (Finalisation) : Finalisation des états (hover, focus) et garantie de la cohérence des cartes et des boutons à travers les trois pages.
 
-🔗 Navigation & User Journey
+# 🔗 Navigation & User Journey
 
 L'expérience utilisateur est conçue autour d'un flow de découverte et d'analyse :
 
@@ -106,7 +78,7 @@ Analytics (Analyse Approfondie) : L'utilisateur se dirige vers Analytics pour vo
 
 L'application utilise le RouterModule d'Angular pour un routage simple et des chargements différés par page (lazy loading, si implémenté) pour optimiser le temps de chargement initial.
 
-📊 Data Integration Strategy
+# 📊 Data Integration Strategy
 
 La stratégie d'intégration des données repose sur la réactivité et la centralisation des sources.
 
@@ -126,7 +98,7 @@ Opérateur map : Il applique séquentiellement les fonctions applyFilters() et a
 
 Cette approche garantit que l'interface utilisateur ne réagit qu'une fois la saisie stabilisée, tout en assurant une source unique de vérité pour l'affichage du tableau.
 
-📱 Progressive Responsive Design
+# 📱 Progressive Responsive Design
 
 L'application a été développée en utilisant une approche mobile-first via les utilitaires de Tailwind CSS.
 
@@ -134,11 +106,12 @@ Structure de Base : Utilisation du flex et grid par défaut (mobile).
 
 Adaptation (Breakpoint md) : Les filtres du formulaire passent de colonnes empilées (1x4) à une grille plus dense (1x4 ou 2x2) via les préfixes responsives (md:grid-cols-4, md:col-span-2).
 
-Tableau (app-tools-table) : Le tableau est le point le plus critique. Sur mobile, les colonnes non essentielles (comme l'ID ou la date de mise à jour) sont masquées ou les données sont présentées sur plusieurs lignes si nécessaire, pour éviter le défilement horizontal.
+Tableau (app-tools-table) : Le tableau est le point le plus critique. Sur mobile, chaque ligne est transformé en carte plus lisible et un select a été ajouté
+pour trier par colonne
 
 Cette méthode garantit une performance et une lisibilité optimales sur tous les appareils.
 
-🧪 Testing Strategy
+# 🧪 Testing Strategy
 
 Étant donné le temps limité, la stratégie de test se concentre sur les unités critiques de logique métier :
 
@@ -154,7 +127,7 @@ Visual Regression : Vérification manuelle de la cohérence visuelle des composa
 
 Flux Réactif : Vérification des logs de console pour s'assurer que les appels de filtrage ne se déclenchent qu'une seule fois après le debounceTime lorsque l'utilisateur interagit avec le slider.
 
-⚡ Performance Optimizations
+# ⚡ Performance Optimizations
 
 Plusieurs techniques ont été utilisées pour assurer une application 3-pages rapide :
 
@@ -166,11 +139,9 @@ Template Pragmatique : L'utilisation de blocs @if pour le rendu conditionnel (co
 
 Date Pipe : Le formatage des dates se fait côté template avec le date pipe d'Angular, ce qui décharge le composant de la logique de formatage, facilitant la maintenance et l'internationalisation.
 
-🎯 Design Consistency Approach
+# 🎯 Design Consistency Approach
 
 La cohérence du design a été maintenue sans mockups J7-J8 grâce à l'adhérence à un ensemble de règles simples :
-
-Couleur d'Accent : Indigo-600 est la seule couleur utilisée pour les éléments interactifs (boutons, icônes principales, sélection du slider).
 
 Conteneurs : Tous les blocs principaux (filtres, tableau, cartes du dashboard) utilisent bg-white, rounded-xl et shadow-lg.
 
@@ -178,7 +149,7 @@ Espacement Vertical : Utilisation d'une échelle d'espacement uniforme basée su
 
 Iconographie : Utilisation exclusive de la librairie Lucide Icons pour maintenir un style d'icône vectoriel cohérent et moderne.
 
-📈 Data Visualization Philosophy
+# 📈 Data Visualization Philosophy
 
 La philosophie de visualisation était de fournir des informations pertinentes et contextuelles :
 
@@ -188,7 +159,7 @@ Intégration au Design System : Les couleurs des charts sont mappées sur la pal
 
 Visualisations Clés : Les graphiques se concentrent sur la répartition des coûts (Diagramme circulaire ou à barres) par owner_department et l'évolution temporelle des dépenses (Diagramme linéaire).
 
-🔮 Next Steps / Complete App Vision
+# 🔮 Next Steps / Complete App Vision
 
 Pour transformer cette application en une solution SaaS Tools complète, les prochaines étapes incluraient :
 
