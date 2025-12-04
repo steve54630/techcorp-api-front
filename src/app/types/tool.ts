@@ -11,6 +11,6 @@ export interface ITool {
   website_url: string
   active_users_count: number
   icon_url: string 
-  created_at: string
-  updated_at: string
+  created_at: Date
+  updated_at: Date
 }

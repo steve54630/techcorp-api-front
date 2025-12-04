@@ -10,16 +10,29 @@ import { icons, LucideAngularModule, Zap } from 'lucide-angular';
   styleUrl: './header.css',
 })
 export class Header {
-   buttons = [
-    { name: 'Dashboard', link : "/" },
-    { name: 'Tools', link : "/tools" },
-    { name: 'Analytics', link : "/analytics" },
-    { name: 'Settings', link : "/settings" },
+
+  isMobileMenuOpen = false;
+  
+  buttons = [
+    { name: 'Dashboard', link: '/' },
+    { name: 'Tools', link: '/tools' },
+    { name: 'Analytics', link: '/analytics' },
+    { name: 'Settings', link: '/settings' },
   ];
+
+  // 2. Méthode pour basculer l'état
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  // 3. (Optionnel) Méthode pour fermer le menu
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
 
   options = [
     { name: 'night', icon: 'moon' },
-    { name: 'notifications',  icon: 'bell' },
-    { name: 'settings', icon : 'settings' }
-  ]
+    { name: 'notifications', icon: 'bell' },
+    { name: 'settings', icon: 'settings' },
+  ];
 }

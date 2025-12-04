@@ -4,10 +4,13 @@ import { LucideAngularModule } from 'lucide-angular';
 import { StatusBadge } from '../status-badge/status-badge';
 import { IToolFilter, Sort } from '../../services/dto/tools.filter.dto';
 import { columnHeaders } from '../../types/column';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ToolCard } from "../tool-card/tool-card";
 
 @Component({
   selector: 'app-tools-table',
-  imports: [LucideAngularModule, StatusBadge],
+  imports: [LucideAngularModule, StatusBadge, DatePipe, FormsModule, ToolCard],
   templateUrl: './tools-table.html',
   styleUrl: './tools-table.css',
 })
@@ -21,7 +24,7 @@ export class ToolsTable {
   selectColumn?: Sort;
 
   @Output() sortChanged = new EventEmitter<IToolFilter>();
-  @Output() pageChange = new EventEmitter<IToolFilter>();
+  @Output() pageChange = new EventEmitter<'prev' | 'next'>();
 
   get columns() {
     return !this.resume
@@ -31,34 +34,28 @@ export class ToolsTable {
 
   isLastPage(): boolean {
     return (
-      this.query._page === Math.ceil((this.totalCount || 0) / this.query._limit)
+      this.query._page ===
+      Math.ceil((this.totalCount || 0) / this.query._limit!)
     );
   }
 
   prevPage() {
-    const newQuery = {
-      ...this.query,
-      _page: this.query._page - 1,
-    };
-
-    if (newQuery._page < 1) {
-      newQuery._page = 1;
-      return;
-    }
-
-    this.pageChange.emit(newQuery);
+    if (this.pageChange) this.pageChange.emit('prev');
   }
 
   nextPage() {
-    const newQuery = {
-      ...this.query,
-      _page: this.query._page + 1,
-    };
-
-    this.pageChange.emit(newQuery);
+    if (this.pageChange) this.pageChange.emit('next');
   }
 
-  updateQuery(column: Sort) {
+  handleSortChange($event: Event) {
+    const target = $event.target as HTMLSelectElement;
+
+    if (target.value) {
+      this.updateQuery(target.value as Sort);
+    }
+  }
+
+  updateQuery(column: Sort, page?: number) {
     this.selectColumn = column;
 
     const currentParams = this.query;
@@ -75,7 +72,7 @@ export class ToolsTable {
       ...currentParams,
       _sort: column,
       _order: newDirection,
-      _page: 1,
+      _page: page,
     };
 
     this.sortChanged.emit(newFilter);

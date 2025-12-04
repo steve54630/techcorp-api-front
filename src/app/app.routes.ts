@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './pages/dashboard/dashboard';
-import { ToolsPage } from './pages/tools/tools';
+import { Dashboard } from './pages/dashboard/dashboard.page';
+import { ToolsPage } from './pages/tools/tools.page';
 import { Analytics } from './pages/analytics/analytics';
 
 export const routes: Routes = [

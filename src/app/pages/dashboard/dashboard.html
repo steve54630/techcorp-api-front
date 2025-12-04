@@ -4,26 +4,46 @@
     Monitor and manage your organization's software tools and expenses
   </p>
 </section>
-<div
-  class="flex flex-row my-8 w-full items-baseline justify-between"
->
-  @if (kpiData$ | async; as kpiData) { @for (kpi of kpiData; track $index) {
-  <app-kpi-cards
-    [title]="kpi.title"
-    [value]="kpi.value"
-    [target]="kpi.target"
-    [unit]="kpi.unit"
-    [trend]="kpi.trend"
-    [class]="`w-104 p-10 border-gray-400 shadow-xl rounded-2xl`"
-  />
-  } }
+<div class="my-8 w-full">
+  @if (kpiData$ | async; as kpiData) {
+  <div
+    class="hidden lg:flex flex-row items-baseline justify-between w-full space-x-4"
+  >
+    @for (kpi of kpiData; track $index) {
+    <app-kpi-cards
+      [title]="kpi.title"
+      [value]="kpi.value"
+      [target]="kpi.target"
+      [unit]="kpi.unit"
+      [trend]="kpi.trend"
+      [class]="`w-full p-6 border-gray-400 shadow-xl rounded-2xl`"
+    />
+    }
+  </div>
+
+  <div
+    class="lg:hidden flex flex-nowrap overflow-x-scroll snap-x snap-mandatory space-x-4 p-4 -mx-4"
+  >
+    @for (kpi of kpiData; track $index) {
+    <div class="shrink-0 w-11/12 sm:w-1/2 snap-center">
+      <app-kpi-cards
+        [title]="kpi.title"
+        [value]="kpi.value"
+        [target]="kpi.target"
+        [unit]="kpi.unit"
+        [trend]="kpi.trend"
+        [class]="`w-full p-6 border-gray-400 shadow-xl rounded-2xl`"
+      />
+    </div>
+    }
+  </div>
+  }
 </div>
 @if (tools$ | async; as tools) { @if (query$ | async; as query) {
 <app-tools-table
   [tools]="tools"
   [query]="query"
-  (sortChanged)="onSortChange($event)"
-  (pageChange)="onPageChange($event)"
+  (sortChanged)="onSortChange($event, 1)"
   [resume]="true"
   [title]="'Recent Tools'"
 />

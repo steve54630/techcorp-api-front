@@ -22,9 +22,8 @@ export class ToolsService {
     this.query.next(newParams);
   }
 
-  getTools(): Observable<IToolResponseDto> {
+  getRecentTools(): Observable<IToolResponseDto> {
     return this.queryParams$.pipe(
-      // Annule l'ancienne requête et envoie la nouvelle avec les paramètres mis à jour
       switchMap((params) => {
         let httpParams = new HttpParams({ fromObject: params as any });
 
@@ -40,6 +39,28 @@ export class ToolsService {
             }))
           );
       })
+    );
+  }
+
+  getTools(): Observable<IToolResponseDto> {
+
+    return this.http
+          .get<ITool[]>(`${this.apiUrl}/tools`, {
+            observe: 'response'
+          })
+          .pipe(
+            map((response) => ({
+              tools: response.body!,
+              total: +response.headers.get('X-Total-Count')!,
+            }))
+          );
+
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.http.get<ITool[]>(`${this.apiUrl}/tools`).pipe(
+      map((response) => response.map((tool) => tool.category)),
+      map((categories) => Array.from(new Set(categories)).sort())
     );
   }
 }

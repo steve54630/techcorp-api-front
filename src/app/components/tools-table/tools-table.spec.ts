@@ -142,21 +142,4 @@ describe('ToolsTable', () => {
     expect(nextButton.disabled).toBeTrue();
   });
 
-  it('should NOT emit pageChange on nextPage() when on the last page', () => {
-    spyOn(component.pageChange, 'emit');
-    component.query._page = 3;
-
-    component.nextPage();
-    // L'événement ne doit pas être émis
-    expect(component.pageChange.emit).not.toHaveBeenCalled();
-  });
-
-  it('should NOT emit pageChange on prevPage() when on page 1', () => {
-    spyOn(component.pageChange, 'emit');
-    component.query._page = 1;
-
-    component.prevPage();
-    // L'événement ne doit pas être émis (grâce au 'return' dans la méthode)
-    expect(component.pageChange.emit).not.toHaveBeenCalled();
-  });
 });

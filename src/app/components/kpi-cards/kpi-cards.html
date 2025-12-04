@@ -1,17 +1,19 @@
-<section [ngClass]="class">
-  <div class="flex flex-row mb-10 w-full justify-between items-center">
-    <h3 class="text-lg ">{{ title }}</h3>
-    <span [ngClass]="color" class="rounded-2xl p-2"
-      ><lucide-icon [name]="icon" class="h-8 w-8"></lucide-icon
-    ></span>
+<section [ngClass]="class" class="p-4 sm:p-6 rounded-lg shadow-md bg-white">
+  <div class="flex flex-row mb-6 sm:mb-8 w-full justify-between items-center">
+    <h3 class="text-base sm:text-lg font-semibold text-gray-700">{{ title }}</h3>
+    <span [ngClass]="color" class="rounded-xl p-2 sm:p-3 flex items-center justify-center">
+      <lucide-icon [name]="icon" class="h-6 w-6 sm:h-8 sm:w-8"></lucide-icon>
+    </span>
   </div>
+
   <div class="flex items-baseline">
-    <p class="text-xl font-bold text-gray-800 mr-2">{{ value }}{{ unit }}</p>
+    <p class="text-2xl sm:text-3xl font-bold text-gray-800 mr-2">{{ value }}{{ unit }}</p>
     @if (target) {
-    <p class="text-xl font-normal text-gray-600">/{{ target }}{{ unit }}k</p>
+    <p class="text-sm sm:text-xl font-normal text-gray-600">/{{ target }}{{ unit }}k</p>
     }
   </div>
-  <div class="my-6 px-2 h-6 w-fit rounded-full" [ngClass]="color">
+
+  <div class="mt-4 sm:mt-6 px-3 py-1 text-sm sm:text-base w-fit rounded-full font-medium" [ngClass]="color">
     {{ trend }}
   </div>
 </section>

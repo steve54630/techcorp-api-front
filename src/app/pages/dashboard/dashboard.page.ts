@@ -4,7 +4,7 @@ import { DataService } from '../../services/data';
 import { map, Observable, Subscription } from 'rxjs';
 import { extractKpiData, Kpi } from '../../utils/kpi';
 import { KpiCards } from '../../components/kpi-cards/kpi-cards';
-import { ToolsService } from '../../services/tools';
+import { ToolsService } from '../../services/tools.service';
 import { ITool } from '../../types/tool';
 import { IToolFilter } from '../../services/dto/tools.filter.dto';
 import { AsyncPipe } from '@angular/common';
@@ -31,16 +31,16 @@ export class Dashboard {
       .pipe(map((analytics) => extractKpiData(analytics)));
 
     this.tools$ = this.toolsService
-      .getTools()
+      .getRecentTools()
       .pipe(map((response) => response.tools!));
     this.query$ = this.toolsService.queryParams$;
   }
 
-  onSortChange(filter: IToolFilter) {
+  onSortChange(filter: IToolFilter, page: number) {
     this.toolsService.updateQuery(filter);
   }
 
-  onPageChange(filter: IToolFilter) {
+  onPageChange(filter: IToolFilter, page: number) {
     this.toolsService.updateQuery(filter);
   }
 }
