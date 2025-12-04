@@ -1,40 +1,45 @@
-📖 README FINAL OBLIGATOIRE
-
-🎯 Aperçu du Projet
+# 🎯 Aperçu du Projet
 
 Ce projet est une application web moderne de type "Software Asset Management" (SAM) construite avec Angular pour les besoins d'un challenge de développement de 3 jours. L'objectif était de créer un tableau de bord permettant de visualiser, filtrer, et analyser l'utilisation et les coûts des outils numériques d'une entreprise.
 
-🚀 Quick Start
+# 🚀 Quick Start
 
 Ce projet est une application Angular. Assurez-vous d'avoir Node.js et Angular CLI installés.
 
-Installation
+# Installation
 
-# Clonez le dépôt
+## Clonez le dépôt
+
+```
 git clone [URL_DU_DEPOT]
+```
 
-# Naviguez vers le répertoire du projet
+## Naviguez vers le répertoire du projet
+
+```
 cd [NOM_DU_PROJET]
+```
 
-# Installez les dépendances
+## Installez les dépendances
+
+```
 npm install
+```
 
+## Lancement de l'Application Angular (Frontend) :
 
-Lancement
-
-Lancement de l'Application Angular (Frontend) :
-
+```
 ng serve
-
+```
 
 L'application sera accessible dans votre navigateur à l'adresse http://localhost:4200/.
 
 
-🏗️ Architecture
+# 🏗️ Architecture
 
 L'architecture est construite autour du principe du "Modular Monolith" et de l'approche Reactive Programming (RxJS).
 
-Structure Projet
+## Structure Projet
 
 | Répertoire | Description |
 |------------|-------------|
@@ -48,7 +53,7 @@ Structure Projet
 | src/app/types | Fichier pour donner le typage de TS |
 | src/app/utils | Fonctions réutilisables dans l'application |
 
-# Organisation du Code
+## Organisation du Code
 
 Observable-Driven Services : L'état global est géré via des services utilisant des BehaviorSubject (e.g., UserService, ToolService).
 
@@ -60,11 +65,11 @@ Typed Data : Utilisation d'interfaces TypeScript (Tool, Department, etc.) pour g
 
 Le Design System a été construit et maintenu rapidement sur une période courte de 3 jours grâce à l'utilisation combinée de Tailwind CSS et Angular Material.
 
-Jour 1 (Fondations) : Mise en place de la palette de couleurs (Indigo pour l'action), de la typographie (sans-serif par défaut) et des utilitaires de base via Tailwind (espacement, ombres, flex/grid).
-
-Jour 2 (Composants Riches) : Intégration d'Angular Material pour les éléments complexes du formulaire de filtre (mat-select, mat-slider, mat-form-field) et du tableau (mat-table). Ces composants ont été personnalisés uniquement via les classes utilitaires de Tailwind pour minimiser l'écriture de CSS brut.
-
-Jour 3 (Finalisation) : Finalisation des états (hover, focus) et garantie de la cohérence des cartes et des boutons à travers les trois pages.
+| Jour | Objectif |
+|------|----------|
+| Jour 1 | (Fondations) : Mise en place de la palette de couleurs (Indigo pour l'action), de la typographie (sans-serif par défaut) et des utilitaires de base via Tailwind (espacement, ombres, flex/grid) |
+| Jour 2 | (Composants Riches) : Intégration d'Angular Material pour les éléments complexes du formulaire de filtre (mat-select, mat-slider, mat-form-field) et du tableau (mat-table). Ces composants ont été personnalisés uniquement via les classes utilitaires de Tailwind pour minimiser l'écriture de CSS brut |
+| Jour 3 | (Finalisation) : Finalisation des états (hover, focus) et garantie de la cohérence des cartes et des boutons à travers les deux pages crées
 
 # 🔗 Navigation & User Journey
 
