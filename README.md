@@ -87,19 +87,19 @@ L'application utilise le RouterModule d'Angular pour un routage simple et des ch
 
 La stratégie d'intégration des données repose sur la réactivité et la centralisation des sources.
 
-Source de Données
+## Source de Données
 
 Le backend est un serveur JSON en ligne stable, permettant d'interroger la ressource principale /tools et les ressources secondaires /departments et /categories.
 
-Gestion des Filtres (RxJS)
+## Gestion des Filtres (RxJS)
 
 La page Tools utilise la combinaison d'Observables suivante :
 
-searchForm.valueChanges : L'Observable émet à chaque changement de formulaire. Il est crucialement pipé avec debounceTime(300) pour éviter de surcharger le système de filtrage pendant que l'utilisateur glisse le slider ou tape.
-
-combineLatest : Il synchronise les valeurs du formulaire (filters) avec la source de données des outils (allTools$) et l'état du tri (currentSort).
-
-Opérateur map : Il applique séquentiellement les fonctions applyFilters() et applySorting() aux données brutes pour produire l'filteredTools$.
+| Observable | Utilisation |
+|------------|-------------|
+| searchForm.valueChanges | L'Observable émet à chaque changement de formulaire. Il est crucialement pipé avec debounceTime(300) pour éviter de surcharger le système de filtrage pendant que l'utilisateur glisse le slider ou tape. |
+| combineLatest | Il synchronise les valeurs du formulaire (filters) avec la source de données des outils (allTools$) et l'état du tri (currentSort) |
+| Opérateur map | Il applique séquentiellement les fonctions applyFilters() et applySorting() aux données brutes pour produire l'filteredTools$ |
 
 Cette approche garantit que l'interface utilisateur ne réagit qu'une fois la saisie stabilisée, tout en assurant une source unique de vérité pour l'affichage du tableau.
 
@@ -120,13 +120,13 @@ Cette méthode garantit une performance et une lisibilité optimales sur tous le
 
 Étant donné le temps limité, la stratégie de test se concentre sur les unités critiques de logique métier :
 
-Tests Unitaires (Focus)
+## Tests Unitaires (Focus)
 
 Service de Filtrage : Tester la méthode applyFilters pour garantir que la logique de prix (bornes minPrice/maxPrice) et les filtres de statut/catégorie fonctionnent correctement dans tous les scénarios.
 
 Service de Tri : Tester la fonction applySorting pour valider le tri principal et, surtout, le tri stable basé sur l'id comme critère de départage secondaire (pour corriger le problème de l'ID 1 qui restait en tête).
 
-Stratégie QA
+## Stratégie QA
 
 Visual Regression : Vérification manuelle de la cohérence visuelle des composants Material (slider, select) après l'application des classes Tailwind.
 
